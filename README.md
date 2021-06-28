@@ -1,6 +1,6 @@
 # Deploy golang app using drone with Kubernetes
 
-See the [chinese blog](https://blog.wu-boy.com/2018/06/drone-kubernetes-with-golang/)
+[![Build Status](https://cloud.drone.io/api/badges/dtherhtun/drone-app/status.svg)](https://cloud.drone.io/dtherhtun/drone-app)
 
 ## write simple golang app
 
