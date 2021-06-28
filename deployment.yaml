@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - name: go-hello
-        image: dther/golang-http:VERSION
+        image: dther/golang-http:latest
         imagePullPolicy: Always
         resources:
           requests:
