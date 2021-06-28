@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: hola
-        image: dther/golang-http
+        image: dther/golang-http:v0.1
         ports:
         - containerPort: 8080
         resources:
