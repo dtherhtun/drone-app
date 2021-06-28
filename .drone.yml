@@ -20,6 +20,8 @@ pipeline:
 
   kustomize:
     image: docker:git
+    environment:
+      - GITHUB_TOKEN: ${GITHUB_TOKEN}
     commands:
       - git clone -b deploy https://dtherhtun:$GITHUB_TOKEN@github.com/dtherhtun/drone-app.git
       - cd drone-app;
