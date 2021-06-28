@@ -27,5 +27,7 @@ pipeline:
       - cat kustomize/bases/hola/deployment.yaml
       - pwd
       - git add .
+      - git config --global user.name "John Doe"
+      - git config --global user.email johndoe@example.com
       - git commit -m "Change image version to ${DRONE_COMMIT_SHA}" -a
       - git push origin deploy
