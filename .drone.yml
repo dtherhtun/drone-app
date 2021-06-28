@@ -19,13 +19,16 @@ pipeline:
       event: [ push, tag ]
 
   kustomize:
+    secrets: [GITHUB_TOKEN]
     image: docker:git
     commands:
+      - echo ${GITHUB_TOKEN}
       - env
-      - git clone -b deploy git@github.com:dtherhtun/drone-app.git
+      - git clone -b deploy https://dtherhtun:${GITHUB_TOKEN}@github.com/dtherhtun/drone-app.git
       - cd drone-app;
       - sed -i "s+dther/golang-http:.*$*+dther/golang-http:${DRONE_COMMIT_SHA}+g" kustomize/bases/hola/deployment.yaml
       - cat kustomize/bases/hola/deployment.yaml
+      - sed -i "s+dtherhtun:+dtherhtun:${GITHUB_TOKEN}+g" .git/config
       - cat .git/config
       - git add .
       - git config --global user.name "drone-ci"
