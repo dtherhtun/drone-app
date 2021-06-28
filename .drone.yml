@@ -19,18 +19,14 @@ pipeline:
       event: [ push, tag ]
 
   kustomize:
-    secrets: [GITHUB_TOKEN]
     image: docker:git
     commands:
-      - git clone -b deploy https://dtherhtun:a8d1ff54aaa45a565d1581f09c4c5ec36085b5fe@github.com/dtherhtun/drone-app.git
-      - cd drone-app;
+      - git fetch origin deploy
+      - git checkout deploy
       - sed -i "s+dther/golang-http:.*$*+dther/golang-http:${DRONE_COMMIT_SHA}+g" kustomize/bases/hola/deployment.yaml
       - cat kustomize/bases/hola/deployment.yaml
-      - cat .git/config
       - git add .
       - git config --global user.name "drone-ci"
       - git config --global user.email ci@drone.io
       - git commit -m "Change image version to ${DRONE_COMMIT_SHA}" -a
-      - git remote set-url origin https://dtherhtun:a8d1ff54aaa45a565d1581f09c4c5ec36085b5fe@github.com/dtherhtun/drone-app.git
-      - cat .git/config
       - git push origin deploy
