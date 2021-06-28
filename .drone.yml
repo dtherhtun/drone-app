@@ -25,7 +25,7 @@ pipeline:
       - mkdir ~/.ssh
       - echo $ssh_key > ~/.ssh/id_rsa
       - chmod 600 ~/.ssh/id_rsa
-      - ssh-agent sh -c 'ssh-add ~/.ssh/id_rsa; git fetch git@github.com'
+      - ssh-agent sh -c 'ssh-add ~/.ssh/id_rsa'
       - git fetch origin deploy
       - git checkout deploy
       - sed -i "s+dther/golang-http:.*$*+dther/golang-http:${DRONE_COMMIT_SHA}+g" kustomize/bases/hola/deployment.yaml
@@ -35,5 +35,4 @@ pipeline:
       - git config --global user.email ci@drone.io
       - git commit -m "Change image version to ${DRONE_COMMIT_SHA}" -a
       - git push origin deploy
-  
 
