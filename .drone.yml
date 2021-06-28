@@ -29,5 +29,13 @@ pipeline:
       - git config --global user.name "drone-ci"
       - git config --global user.email ci@drone.io
       - git commit -m "Change image version to ${DRONE_COMMIT_SHA}" -a
-      - git remote set-url origin https://dtherhtun:${GITHUB_TOKEN}@github.com/dtherhtun/drone-app.git
-      - git push origin deploy
+  
+  push:
+    image: appleboy/drone-git-push
+    settings:
+      remote_name: origin
+      branch: deploy
+      local_branch: deploy
+      ssh_key:
+        from_secret: ssh_key
+
