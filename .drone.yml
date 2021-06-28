@@ -30,7 +30,8 @@ pipeline:
       - git config --global user.email ci@drone.io
       - git commit -m "Change image version to ${DRONE_COMMIT_SHA}" -a
   
-  
+  push:
+    secrets: [ ssh_key ]
     image: appleboy/drone-git-push
     settings:
       branch: deploy
