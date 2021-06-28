@@ -19,12 +19,6 @@ pipeline:
       event: [ push, tag ]
 
   deploy:
-    image: danielgormly/drone-plugin-kube:0.0.2
-    settings:
-      template: deployment.yaml
-      ca:
-        from_secret: kubernetes_cert
-      server:
-        from_secret: kubernetes_server
-      token:
-        from_secret: kubernetes_token
+    image: komljen/drone-kubectl-helm
+    secrets: [ kubernetes_server, kubernetes_cert, kubernetes_token ]
+    kubectl: "get pods"
