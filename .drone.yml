@@ -19,7 +19,13 @@ pipeline:
       event: [ push, tag ]
 
   deploy:
-    image: sh4d1/drone-kubernetes
-    kubernetes_template: deployment.yml
-    kubernetes_namespace: default
-    secrets: [ kubernetes_server, kubernetes_cert, kubernetes_token ]
+    image: sinlead/drone-kubectl
+    settings:
+      kubernetes_server:
+        from_secret: kubernetes_server
+      kubernetes_cert:
+        from_secret: kubernetes_cert
+      kubernetes_token:
+        from_secret: kubernetes_token
+    commands:
+      - kubectl apply -f deployment.yml
