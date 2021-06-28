@@ -20,6 +20,7 @@ pipeline:
 
   kustomize:
     image: docker:git
+    secrets: [ssh_key]
     commands:
       - mkdir ~/.ssh
       - echo "${ssh_key}" > ~/.ssh/id_rsa
