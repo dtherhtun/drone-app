@@ -14,11 +14,7 @@ pipeline:
     secrets: [ docker_username, docker_password ]
     repo: dther/golang-http
     dockerfile: Dockerfile
-    default_tags: true
+    tags: ${DRONE_COMMIT_SHA}
     when:
       event: [ push, tag ]
 
-  deploy:
-    image: komljen/drone-kubectl-helm
-    secrets: [ kubernetes_server, kubernetes_cert, kubernetes_token ]
-    kubectl: "get pods"
