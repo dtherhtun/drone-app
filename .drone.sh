@@ -1,17 +1,9 @@
 #!/bin/sh
 
 mkdir ~/.ssh
-[ -z "$SSH_KEY" ] && echo "missing ssh key" && exit 3
-echo -n $SSH_KEY > ~/.ssh/id_rsa
-echo $HOME
-pwd
-chmod 600 ~/.ssh/id_rsa
-touch ~/.ssh/known_hosts
-chmod 600 ~/.ssh/known_hosts
-ssh-keyscan -H github.com > /etc/ssh/ssh_known_hosts 2> /dev/null
+[ -z "$GH_TOKEN" ] && echo "missing github token" && exit 3
 
-
-git clone git@github.com:dtherhtun/drone-app.git -b deploy app
+git clone https://dtherhtun:$GH_TOKEN@github.com:dtherhtun/drone-app.git -b deploy app
 cd app
 sed -i "s+dther/golang-http:.*$*+dther/golang-http:${DRONE_COMMIT_SHA}+g" kustomize/bases/hola/deployment.yaml
 git add .
