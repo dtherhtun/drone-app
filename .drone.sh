@@ -3,7 +3,7 @@
 mkdir ~/.ssh
 [ -z "$GH_TOKEN" ] && echo "missing github token" && exit 3
 
-git clone https://dtherhtun:$GH_TOKEN@github.com:dtherhtun/drone-app.git -b deploy app
+git clone https://dtherhtun:$GH_TOKEN@github.com/dtherhtun/drone-app.git -b deploy app
 cd app
 sed -i "s+dther/golang-http:.*$*+dther/golang-http:${DRONE_COMMIT_SHA}+g" kustomize/bases/hola/deployment.yaml
 git add .

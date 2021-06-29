@@ -20,7 +20,7 @@ pipeline:
 
   kustomize:
     image: docker:git
-    secrets: [ SSH_KEY, DRONE_COMMIT_SHA, GH_TOKEN ]
+    secrets: [ SSH_KEY, GH_TOKEN ]
     commands: sh .drone.sh
 
 
