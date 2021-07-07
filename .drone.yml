@@ -18,9 +18,5 @@ pipeline:
     when:
       event: [ push, tag ]
 
-  kustomize:
-    image: docker:git
-    secrets: [ SSH_KEY, GH_TOKEN ]
-    commands: sh .drone.sh
 
 
